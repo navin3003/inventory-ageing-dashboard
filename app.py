@@ -33,25 +33,115 @@ st.markdown(
     """
 <style>
 
-    .block-container {
+    /* Use the entire Streamlit viewport for the dashboard. */
 
-        padding: 0.25rem 0.5rem 0 0.5rem;
+    html, body, [data-testid="stAppViewContainer"] {
 
-        max-width: 100%;
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        overflow-x: hidden !important;
+
+        background: #040b16 !important;
 
     }
+ 
+    /* Remove Streamlit's centered page width and outer whitespace. */
+
+    [data-testid="stMain"],
+
+    [data-testid="stMainBlockContainer"],
+
+    .main .block-container,
+
+    section.main > div {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+    }
+ 
+    /* Remove gaps around the HTML component. */
+
+    [data-testid="stElementContainer"],
+
+    [data-testid="stCustomComponentV1"],
+
+    [data-testid="stCustomComponentV1"] > div {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+    }
+ 
+    iframe {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        min-width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        border: 0 !important;
+
+        background: #040b16 !important;
+
+    }
+ 
+    /* Keep uploader and report information inside the left menu. */
 
     [data-testid="stSidebar"] {
 
-        min-width: 340px;
+        min-width: 350px !important;
 
-        max-width: 420px;
+        max-width: 420px !important;
 
     }
+ 
+    [data-testid="stSidebarContent"] {
 
-    [data-testid="stSidebarContent"] { padding-top: 1rem; }
+        padding-top: 1rem !important;
 
-    iframe { width: 100%; border: none; }
+    }
+ 
+    /* Keep only Streamlit's small top toolbar/menu. */
+
+    [data-testid="stHeader"] {
+
+        background: transparent !important;
+
+        height: 2.75rem !important;
+
+    }
+ 
+    /* Hide unnecessary footer decoration. */
+
+    footer {
+
+        display: none !important;
+
+    }
 </style>
 
     """,
@@ -599,6 +689,16 @@ if latest_report_bytes:
 
     )
  
-components.html(dashboard_html, height=2400, scrolling=True)
+components.html(
+
+    dashboard_html,
+
+    height=2400,
+
+    scrolling=True,
+
+    width=None,
+
+)
 
  
