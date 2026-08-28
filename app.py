@@ -33,6 +33,8 @@ st.markdown(
     """
 <style>
 
+    /* Stable full-width layout. Do not force parent heights or fixed positioning. */
+
     html, body, [data-testid="stAppViewContainer"] {
 
         margin: 0 !important;
@@ -41,35 +43,19 @@ st.markdown(
 
         width: 100% !important;
 
-        height: 100% !important;
-
         background: #040b16 !important;
 
-        overflow: hidden !important;
+        overflow-x: hidden !important;
 
     }
  
-    [data-testid="stMain"] {
+    [data-testid="stMain"],
 
-        width: 100% !important;
-
-        height: 100vh !important;
-
-        margin: 0 !important;
-
-        padding: 0 !important;
-
-        overflow: hidden !important;
-
-    }
- 
     [data-testid="stMainBlockContainer"],
 
     .main .block-container {
 
         width: 100% !important;
-
-        height: 100vh !important;
 
         max-width: none !important;
 
@@ -87,8 +73,6 @@ st.markdown(
 
         width: 100% !important;
 
-        height: 100vh !important;
-
         max-width: none !important;
 
         margin: 0 !important;
@@ -103,9 +87,7 @@ st.markdown(
 
         width: 100% !important;
 
-        height: 100vh !important;
-
-        min-height: 100vh !important;
+        min-width: 100% !important;
 
         margin: 0 !important;
 
@@ -117,9 +99,33 @@ st.markdown(
 
     }
  
-    /* Sidebar floats above the dashboard and never reserves page width. */
+    /* Completely remove the collapsed sidebar rail from the page layout. */
 
-    [data-testid="stSidebar"] {
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+
+        position: fixed !important;
+
+        left: -430px !important;
+
+        width: 0 !important;
+
+        min-width: 0 !important;
+
+        max-width: 0 !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        overflow: visible !important;
+
+        z-index: 999999 !important;
+
+    }
+ 
+    /* When opened, sidebar overlays the dashboard instead of pushing it. */
+
+    section[data-testid="stSidebar"][aria-expanded="true"] {
 
         position: fixed !important;
 
@@ -135,9 +141,9 @@ st.markdown(
 
         max-width: 390px !important;
 
-        z-index: 1000001 !important;
+        z-index: 999999 !important;
 
-        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.60) !important;
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.65) !important;
 
     }
  
@@ -147,17 +153,17 @@ st.markdown(
 
     }
  
-    /* Leave only the compact sidebar opener visible while collapsed. */
+    /* Only the small sidebar opener is visible when the sidebar is closed. */
 
     [data-testid="stSidebarCollapsedControl"] {
 
         position: fixed !important;
 
-        top: 0.45rem !important;
+        top: 0.5rem !important;
 
-        left: 0.45rem !important;
+        left: 0.5rem !important;
 
-        z-index: 1000002 !important;
+        z-index: 1000000 !important;
 
         width: 2.25rem !important;
 
@@ -165,37 +171,17 @@ st.markdown(
 
         border-radius: 8px !important;
 
-        background: rgba(6, 26, 51, 0.94) !important;
+        background: rgba(6, 26, 51, 0.95) !important;
 
         border: 1px solid #00c8ff !important;
 
-        box-shadow: 0 0 10px rgba(0, 200, 255, 0.35) !important;
+        box-shadow: 0 0 10px rgba(0, 200, 255, 0.40) !important;
 
     }
  
     [data-testid="stHeader"] {
 
-        position: fixed !important;
-
-        top: 0 !important;
-
-        right: 0 !important;
-
         background: transparent !important;
-
-        z-index: 1000000 !important;
-
-        pointer-events: none !important;
-
-    }
- 
-    [data-testid="stHeader"] button,
-
-    [data-testid="stHeader"] a,
-
-    [data-testid="stSidebarCollapsedControl"] {
-
-        pointer-events: auto !important;
 
     }
  
@@ -755,7 +741,7 @@ components.html(
 
     dashboard_html,
 
-    height=900,
+    height=1050,
 
     scrolling=True,
 
