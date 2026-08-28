@@ -466,5 +466,5 @@ def download_latest_metadata():
         supabase = get_supabase()
 
 
-        metadata_bytes = supabase.
+        metadata_bytes = supabase
  
