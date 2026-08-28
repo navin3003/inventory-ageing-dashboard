@@ -467,4 +467,7 @@ def download_latest_metadata():
 
 
         metadata_bytes = supabase
+        if latest_report_bytes:
+
+    try:
  
