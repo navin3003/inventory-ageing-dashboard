@@ -33,37 +33,53 @@ st.markdown(
     """
 <style>
 
-    /* Use the entire Streamlit viewport for the dashboard. */
-
     html, body, [data-testid="stAppViewContainer"] {
 
         margin: 0 !important;
 
         padding: 0 !important;
 
-        width: 100% !important;
+        width: 100vw !important;
 
-        max-width: 100% !important;
+        height: 100vh !important;
 
-        overflow-x: hidden !important;
+        overflow: hidden !important;
 
         background: #040b16 !important;
 
     }
  
-    /* Remove Streamlit's centered page width and outer whitespace. */
+    /* Dashboard fills the complete browser viewport. */
 
-    [data-testid="stMain"],
+    [data-testid="stMain"] {
 
+        position: fixed !important;
+
+        inset: 0 !important;
+
+        width: 100vw !important;
+
+        height: 100vh !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        overflow: hidden !important;
+
+    }
+ 
     [data-testid="stMainBlockContainer"],
 
     .main .block-container,
 
     section.main > div {
 
-        width: 100% !important;
+        width: 100vw !important;
 
-        max-width: 100% !important;
+        height: 100vh !important;
+
+        max-width: none !important;
 
         margin: 0 !important;
 
@@ -71,17 +87,17 @@ st.markdown(
 
     }
  
-    /* Remove gaps around the HTML component. */
-
     [data-testid="stElementContainer"],
 
     [data-testid="stCustomComponentV1"],
 
     [data-testid="stCustomComponentV1"] > div {
 
-        width: 100% !important;
+        width: 100vw !important;
 
-        max-width: 100% !important;
+        height: 100vh !important;
+
+        max-width: none !important;
 
         margin: 0 !important;
 
@@ -93,11 +109,15 @@ st.markdown(
 
         display: block !important;
 
-        width: 100% !important;
+        width: 100vw !important;
 
-        min-width: 100% !important;
+        height: 100vh !important;
 
-        max-width: 100% !important;
+        min-width: 100vw !important;
+
+        min-height: 100vh !important;
+
+        max-width: none !important;
 
         margin: 0 !important;
 
@@ -109,13 +129,25 @@ st.markdown(
 
     }
  
-    /* Keep uploader and report information inside the left menu. */
+    /* Sidebar overlays the dashboard instead of reducing its width. */
 
     [data-testid="stSidebar"] {
+
+        position: fixed !important;
+
+        top: 0 !important;
+
+        left: 0 !important;
+
+        bottom: 0 !important;
 
         min-width: 350px !important;
 
         max-width: 420px !important;
+
+        z-index: 1000001 !important;
+
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.55) !important;
 
     }
  
@@ -125,19 +157,57 @@ st.markdown(
 
     }
  
-    /* Keep only Streamlit's small top toolbar/menu. */
+    /* Keep only the top controls above the dashboard. */
 
     [data-testid="stHeader"] {
 
+        position: fixed !important;
+
+        top: 0 !important;
+
+        left: 0 !important;
+
+        right: 0 !important;
+
+        height: 3rem !important;
+
         background: transparent !important;
 
-        height: 2.75rem !important;
+        z-index: 1000000 !important;
+
+        pointer-events: none !important;
 
     }
  
-    /* Hide unnecessary footer decoration. */
+    [data-testid="stHeader"] button,
 
-    footer {
+    [data-testid="stHeader"] a,
+
+    [data-testid="stSidebarCollapsedControl"] {
+
+        pointer-events: auto !important;
+
+    }
+ 
+    [data-testid="stSidebarCollapsedControl"] {
+
+        position: fixed !important;
+
+        top: 0.5rem !important;
+
+        left: 0.5rem !important;
+
+        z-index: 1000002 !important;
+
+        background: rgba(6, 26, 51, 0.92) !important;
+
+        border: 1px solid #00c8ff !important;
+
+        border-radius: 8px !important;
+
+    }
+ 
+    footer, [data-testid="stStatusWidget"] {
 
         display: none !important;
 
@@ -693,7 +763,7 @@ components.html(
 
     dashboard_html,
 
-    height=2400,
+    height=1000,
 
     scrolling=True,
 
