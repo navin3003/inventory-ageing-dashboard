@@ -41,17 +41,35 @@ st.markdown(
 
         width: 100% !important;
 
+        height: 100% !important;
+
         background: #040b16 !important;
+
+        overflow: hidden !important;
 
     }
  
-    [data-testid="stMain"],
+    [data-testid="stMain"] {
 
+        width: 100% !important;
+
+        height: 100vh !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        overflow: hidden !important;
+
+    }
+ 
     [data-testid="stMainBlockContainer"],
 
     .main .block-container {
 
         width: 100% !important;
+
+        height: 100vh !important;
 
         max-width: none !important;
 
@@ -69,6 +87,8 @@ st.markdown(
 
         width: 100% !important;
 
+        height: 100vh !important;
+
         max-width: none !important;
 
         margin: 0 !important;
@@ -83,7 +103,9 @@ st.markdown(
 
         width: 100% !important;
 
-        min-width: 100% !important;
+        height: 100vh !important;
+
+        min-height: 100vh !important;
 
         margin: 0 !important;
 
@@ -95,6 +117,8 @@ st.markdown(
 
     }
  
+    /* Sidebar floats above the dashboard and never reserves page width. */
+
     [data-testid="stSidebar"] {
 
         position: fixed !important;
@@ -105,13 +129,15 @@ st.markdown(
 
         bottom: 0 !important;
 
-        min-width: 350px !important;
+        width: 390px !important;
 
-        max-width: 420px !important;
+        min-width: 390px !important;
 
-        z-index: 999999 !important;
+        max-width: 390px !important;
 
-        box-shadow: 8px 0 28px rgba(0,0,0,.55) !important;
+        z-index: 1000001 !important;
+
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.60) !important;
 
     }
  
@@ -121,13 +147,63 @@ st.markdown(
 
     }
  
-    [data-testid="stHeader"] {
+    /* Leave only the compact sidebar opener visible while collapsed. */
 
-        background: transparent !important;
+    [data-testid="stSidebarCollapsedControl"] {
+
+        position: fixed !important;
+
+        top: 0.45rem !important;
+
+        left: 0.45rem !important;
+
+        z-index: 1000002 !important;
+
+        width: 2.25rem !important;
+
+        height: 2.25rem !important;
+
+        border-radius: 8px !important;
+
+        background: rgba(6, 26, 51, 0.94) !important;
+
+        border: 1px solid #00c8ff !important;
+
+        box-shadow: 0 0 10px rgba(0, 200, 255, 0.35) !important;
 
     }
  
-    footer { display: none !important; }
+    [data-testid="stHeader"] {
+
+        position: fixed !important;
+
+        top: 0 !important;
+
+        right: 0 !important;
+
+        background: transparent !important;
+
+        z-index: 1000000 !important;
+
+        pointer-events: none !important;
+
+    }
+ 
+    [data-testid="stHeader"] button,
+
+    [data-testid="stHeader"] a,
+
+    [data-testid="stSidebarCollapsedControl"] {
+
+        pointer-events: auto !important;
+
+    }
+ 
+    footer, [data-testid="stStatusWidget"] {
+
+        display: none !important;
+
+    }
 </style>
 
     """,
@@ -679,7 +755,7 @@ components.html(
 
     dashboard_html,
 
-    height=1100,
+    height=900,
 
     scrolling=True,
 
