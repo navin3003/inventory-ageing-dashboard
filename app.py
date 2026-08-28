@@ -1,9 +1,6 @@
-from pathlib import Path
-
-
 import streamlit as st
 
-import streamlit.components.v1 as components
+from supabase import create_client
 
 
 
@@ -12,34 +9,51 @@ st.set_page_config(
 
     page_title="Inventory Ageing Dashboard",
 
-    page_icon="📊",
-
     layout="wide",
 
-    initial_sidebar_state="collapsed",
-
 )
 
 
-html_file = Path(__file__).parent / "dashboard.html"
+st.title("Inventory Ageing Dashboard")
 
 
-if not html_file.exists():
+try:
 
-    st.error("dashboard.html was not found in the repository.")
+    supabase = create_client(
 
-    st.stop()
+        st.secrets["SUPABASE_URL"],
+
+        st.secrets["SUPABASE_KEY"],
+
+    )
 
 
-dashboard_html = html_file.read_text(encoding="utf-8")
+    buckets = supabase.storage.list_buckets()
+
+    bucket_names = [bucket.name for bucket in buckets]
 
 
-components.html(
+    if "ageing-reports" in bucket_names:
 
-    dashboard_html,
+        st.success(
 
-    height=1600,
+            "Supabase is connected and the ageing-reports "
 
-    scrolling=True,
+            "bucket is available."
 
-)
+        )
+
+    else:
+
+        st.warning(
+
+            "Supabase is connected, but the ageing-reports "
+
+            "bucket was not found."
+
+        )
+
+
+except Exception as error:
+
+    st.error(f"Supabase connection failed: {error}")
